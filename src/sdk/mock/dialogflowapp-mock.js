@@ -156,7 +156,6 @@ class DfaV2RequestBuilder {
 const DialogflowV2Mock = () => {
   global.dfaV2App = new DialogflowV2AppMock();
   const mock = (request) => {
-    console.log('executing request!!!', request.body.intent);
     global.dfaV2App.setRequest(request);
     global.dfaV2App.executeIntent(request.body.intent);
   };

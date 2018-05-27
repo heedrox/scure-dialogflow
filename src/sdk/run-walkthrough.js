@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 const { appMock } = require('./mock/app-mock');
 const { aDfaV2Request, getDfaV2App } = require('./mock/dialogflowapp-mock');
 const { buildScureFor } = require('scure').scure;
