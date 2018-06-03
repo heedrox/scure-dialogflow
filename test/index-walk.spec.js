@@ -39,7 +39,7 @@ describe('Ric Escape - when walking', () => {
     it('explains places to go when no arg is given', () => {
       const request = aDfaV2Request()
         .withIntent('walk')
-        .withArgs({})
+        .withArgs({ })
         .withData({ roomId: data.room })
         .build();
 
