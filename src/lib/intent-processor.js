@@ -2,9 +2,10 @@ const { fallback, timeOver } = require('../intents/index');
 const { scureInitializeState } = require('scure').commands;
 const { isTimeOver } = require('./common');
 
+
+const isBeginning = (scure, conv) => conv.data.numCommands < scure.getInit().welcome.length;
 const getIntentToUse = (scure, conv, intentFunction) => {
-  const isBeginning = conv.data.numCommands < scure.getInit().welcome.length;
-  if (isBeginning) {
+  if (isBeginning(scure, conv)) {
     return fallback;
   } else if (isTimeOver(conv.data)) {
     return timeOver;
