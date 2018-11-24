@@ -16,7 +16,6 @@ const getCommand = intent => INTENT_COMMANDS_MAP.get(intent);
 const getIntent = command => [...INTENT_COMMANDS_MAP.keys()].find(byCommand(command));
 
 const checkForSyns = originalIntent => scure => (conv, args) => {
-  console.log('check for syns');
   const argument = getArgument(args, 'arg');
   const command = getCommand(originalIntent);
   const commandToReplace = getCommandSyn(command, argument, conv.data, scure);
