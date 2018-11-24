@@ -1,5 +1,9 @@
 # SCURE DIALOGFLOW - Script Creation Utilities for Ric Escape (Conversational adventures) with Dialogflow / Google Assistant.
 
+## 1.1.0
+- Synced with scure@1.1.0
+- Allows to walk from rooms to rooms with same names
+
 ## 1.0.10
 - Synced with scure@1.0.10
 - Allows command synonyms
