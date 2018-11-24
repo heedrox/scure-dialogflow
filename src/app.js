@@ -1,31 +1,9 @@
 process.env.DEBUG = 'actions-on-google:*';
 const { dialogflow } = require('actions-on-google');
 const { buildScureFor } = require('scure').scure;
-const { Commands } = require('scure').dsl;
 const { intentProcessor } = require('./lib/intent-processor');
+const { checkForSyns } = require('./lib/check-for-syns');
 const { bye, fallback, help, inventory, look, pickup, use, walk, welcome, answer } = require('./intents');
-const { getArgument } = require('./lib/common');
-
-const INTENT_COMMANDS_MAP = new Map([
-  [walk, Commands.WALK],
-  [look, Commands.LOOK],
-  [pickup, Commands.PICKUP],
-  [use, Commands.USE],
-]);
-const byCommand = command => intent => INTENT_COMMANDS_MAP.get(intent) === command;
-const getCommand = intent => INTENT_COMMANDS_MAP.get(intent);
-const getIntent = command => [...INTENT_COMMANDS_MAP.keys()].find(byCommand(command));
-const byCommandSyn = (command, argument) => commandSyn => {
-  return (commandSyn.fromCommand === command) && (argument === commandSyn.arg);
-};
-const checkForSyns = originalIntent => scure => (conv, args) => {
-  const argument = getArgument(args, 'arg');
-  const command = getCommand(originalIntent);
-  const commandToReplace = scure.data.commandSyns ?
-    scure.data.commandSyns.find(byCommandSyn(command, argument)) : null;
-  const updatedIntent = commandToReplace ? getIntent(commandToReplace.toCommand) : originalIntent;
-  updatedIntent(scure)(conv, args);
-};
 
 const app = (data) => {
   const scure = buildScureFor(data);
