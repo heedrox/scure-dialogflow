@@ -39,7 +39,7 @@
   },
   "dependencies": {
     "actions-on-google": "^2.1.1",
-    "scure": "1.0.10"
+    "scure": "1.2.0"
   },
   "devDependencies": {
     "babel-eslint": "^8.2.3",
