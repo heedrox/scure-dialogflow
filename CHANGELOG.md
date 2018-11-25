@@ -1,5 +1,8 @@
 # SCURE DIALOGFLOW - Script Creation Utilities for Ric Escape (Conversational adventures) with Dialogflow / Google Assistant.
 
+## 1.3.2
+- Use scure.data.init.totalMinutes for isTimeOver
+
 ## 1.3.1
 - Allow query texts based on data in walkthrough (queryText = 'data.XXXXX')
 
