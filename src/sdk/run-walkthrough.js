@@ -5,21 +5,32 @@ const { buildScureFor } = require('scure').scure;
 
 const getDfaV2Conv = () => getDfaV2App().conv;
 
-const runWalkthrough = (data, commands) => {
+const isQueryTextBasedOnData = qt => (qt && qt.indexOf('data.') >= 0);
+const getDataValueOfQuery = (qt, data) => {
+  const qtr = qt.replace('data.', '');
+  return `${data[qtr]}`;
+};
+const parseQueryText = (queryText, data) =>
+  (isQueryTextBasedOnData(queryText) ? getDataValueOfQuery(queryText, data) : queryText);
+
+const runWalkthrough = (scureData, commands) => {
   console.log('Executing walkthrough... ');
 
-  global.buildScure = () => buildScureFor(data);
+  global.buildScure = () => buildScureFor(scureData);
 
-  const appMockData = appMock(data);
+  const appMockData = appMock(scureData);
 
   commands.forEach((command) => {
     console.log('\n\x1b[33mcommand', command, '\x1b[0m');
+    const data = getDfaV2Conv() ? getDfaV2Conv().data : null;
+
+    const queryText = parseQueryText(command.queryText, data);
 
     const request = aDfaV2Request()
       .withIntent(command.intent)
       .withArgs({ arg: command.arg })
-      .withData(getDfaV2Conv() ? getDfaV2Conv().data : null)
-      .withQueryText(command.queryText ? command.queryText : null)
+      .withData(data)
+      .withQueryText(queryText)
       .build();
 
     appMockData(request);
