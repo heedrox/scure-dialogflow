@@ -1,6 +1,6 @@
 {
   "name": "scure-dialogflow",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "Javascript engine for creating conversational adventures with Dialogflow / GoogleAssistant through SCURE",
   "main": "index.js",
   "scripts": {
