@@ -1,6 +1,8 @@
 const { getArgument } = require('../lib/common');
 const { overwriteDataFrom } = require('../lib/common');
 const { scureLook } = require('scure').commands;
+const { sendResponse } = require('../lib/common');
+
 
 const look = scure => (conv, args) => {
   const itemName = getArgument(args, 'arg');
@@ -8,7 +10,7 @@ const look = scure => (conv, args) => {
   const scureResponse = scureLook(itemName, conv.data, scure);
 
   overwriteDataFrom(scureResponse, conv);
-  conv.ask(scureResponse.sentence);
+  sendResponse(conv, scure, scureResponse);
 };
 
 exports.look = look;

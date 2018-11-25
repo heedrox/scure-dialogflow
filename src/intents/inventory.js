@@ -1,9 +1,10 @@
 const { scureInventory } = require('scure').commands;
+const { sendResponse } = require('../lib/common');
 
 const inventory = scure => (conv) => {
   const scureResponse = scureInventory(conv.data, scure);
 
-  conv.ask(scureResponse.sentence);
+  sendResponse(conv, scure, scureResponse);
 };
 
 exports.inventory = inventory;

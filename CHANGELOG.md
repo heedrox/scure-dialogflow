@@ -1,5 +1,8 @@
 # SCURE DIALOGFLOW - Script Creation Utilities for Ric Escape (Conversational adventures) with Dialogflow / Google Assistant.
 
+## 1.3.3
+- Add final question if no question at the end
+
 ## 1.3.2
 - Use scure.data.init.totalMinutes for isTimeOver
 

@@ -1,5 +1,6 @@
 const { getArgument } = require('../lib/common');
 const { overwriteDataFrom } = require('../lib/common');
+const { sendResponse } = require('../lib/common');
 
 const { scurePickup } = require('scure').commands;
 
@@ -9,7 +10,7 @@ const pickup = scure => (conv, args) => {
   const scureResponse = scurePickup(itemName, conv.data, scure);
 
   overwriteDataFrom(scureResponse, conv);
-  conv.ask(scureResponse.sentence);
+  sendResponse(conv, scure, scureResponse);
 };
 
 exports.pickup = pickup;

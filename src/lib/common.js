@@ -67,6 +67,11 @@ exports.sendResponse = (conv, scure, scureResponse) => {
     const finalWords = `${finalSentence.description} ${endingRemainingTime}`;
     conv.close(finalWords);
   } else {
-    conv.ask(finalSentence);
+    const finalQuestion = scure.sentences.get('final-question');
+    if (finalSentence.indexOf('?') >= finalSentence.length - 10) {
+      conv.ask(finalSentence);
+    } else {
+      conv.ask(`${finalSentence} ${finalQuestion}`);
+    }
   }
 };
