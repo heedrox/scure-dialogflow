@@ -58,6 +58,9 @@ exports.processContext = (conv) => {
   }
 };
 
+const shouldNotIncludeQuestion = sentence =>
+  (sentence.indexOf('?') >= sentence.length - 10) || (sentence.indexOf('<speak>') >= 0);
+
 exports.sendResponse = (conv, scure, scureResponse) => {
   const finalSentence = scureResponse.sentence;
   if (finalSentence.isEndingScene) {
@@ -68,7 +71,7 @@ exports.sendResponse = (conv, scure, scureResponse) => {
     conv.close(finalWords);
   } else {
     const finalQuestion = scure.sentences.get('final-question');
-    if (finalSentence.indexOf('?') >= finalSentence.length - 10) {
+    if (shouldNotIncludeQuestion(finalSentence)) {
       conv.ask(finalSentence);
     } else {
       conv.ask(`${finalSentence} ${finalQuestion}`);
