@@ -7,7 +7,7 @@ const isBeginning = (scure, conv) => conv.data.numCommands < scure.getInit().wel
 const getIntentToUse = (scure, conv, intentFunction) => {
   if (isBeginning(scure, conv)) {
     return fallback;
-  } else if (isTimeOver(conv.data)) {
+  } else if (isTimeOver(conv.data, scure)) {
     return timeOver;
   }
   return intentFunction;

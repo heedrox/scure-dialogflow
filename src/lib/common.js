@@ -29,10 +29,10 @@ exports.overwriteDataFrom = (scureResponse, conv) => {
   }
 };
 
-exports.isTimeOver = (data) => {
+exports.isTimeOver = (data, scure) => {
   const startTime = new Date(JSON.parse(data.startTime || JSON.stringify(new Date())));
   const currentTime = new Date();
-  return (currentTime.getTime() - startTime.getTime()) > (TOTAL_MINS * 60 * 1000);
+  return (currentTime.getTime() - startTime.getTime()) > (scure.data.init.totalMinutes * 60 * 1000);
 };
 
 exports.cleanData = (conv) => {
