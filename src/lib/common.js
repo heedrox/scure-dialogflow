@@ -1,5 +1,3 @@
-const TOTAL_MINS = 30;
-
 const forceItemsToBeArray = (items) => {
   if (items && typeof items === 'object' && typeof items.length === 'number') return items;
   return [items];
