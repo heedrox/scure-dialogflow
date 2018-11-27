@@ -3,6 +3,11 @@ const forceItemsToBeArray = (items) => {
   return [items];
 };
 
+const substitute = (sentence, args) => {
+  const replacer = (s1, s2) => s1.replace(`{${s2}}`, args[s2]);
+  return Object.keys(args).reduce(replacer, sentence);
+};
+
 exports.getArgument = (args, argName) => {
   const value = args[argName];
   if (!value) return null;
@@ -61,20 +66,22 @@ exports.processContext = (conv) => {
 const shouldNotIncludeQuestion = sentence =>
   (sentence.indexOf('?') >= sentence.length - 10) || (sentence.indexOf('<speak>') >= 0);
 
+const getFinalSentence = (scure, conv, finalSentence) => {
+  const timeLeft = scure.getLeftTimeFrom(conv.data.startTime);
+  const remainingTime =
+    scure.sentences.get('ending-remaining-time', { timeLeft });
+  return substitute(finalSentence.description, { remainingTime });
+};
+
 exports.sendResponse = (conv, scure, scureResponse) => {
   const finalSentence = scureResponse.sentence;
   if (finalSentence.isEndingScene) {
-    const timeLeft = scure.getLeftTimeFrom(conv.data.startTime);
-    const endingRemainingTime =
-      scure.sentences.get('ending-remaining-time', { timeLeft });
-    const finalWords = `${finalSentence.description} ${endingRemainingTime}`;
+    const finalWords = getFinalSentence(scure, conv, finalSentence);
     conv.close(finalWords);
+  } else if (shouldNotIncludeQuestion(finalSentence)) {
+    conv.ask(finalSentence);
   } else {
     const finalQuestion = scure.sentences.get('final-question');
-    if (shouldNotIncludeQuestion(finalSentence)) {
-      conv.ask(finalSentence);
-    } else {
-      conv.ask(`${finalSentence} ${finalQuestion}`);
-    }
+    conv.ask(`${finalSentence} ${finalQuestion}`);
   }
 };
