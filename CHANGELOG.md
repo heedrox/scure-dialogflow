@@ -1,5 +1,8 @@
 # SCURE DIALOGFLOW - Script Creation Utilities for Ric Escape (Conversational adventures) with Dialogflow / Google Assistant.
 
+## 1.3.7
+- Expose getCommandForIntent and getIntentForCommand (so you can extend and change items through intent mapper)
+
 ## 1.3.6
 - Be able to set where to add final ending time.
 
