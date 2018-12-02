@@ -59,6 +59,7 @@ exports.baseChars = str => str.toLowerCase().replace(/[áäàÀÁÂÃÄÅ]/g, 'a
 exports.processContext = (conv) => {
   if (conv.data.lastContext) {
     conv.contexts.set(conv.data.lastContext, 1);
+    conv.contexts.set('use-followup', 1);
     conv.data.lastContext = undefined;
   }
 };
