@@ -1,5 +1,8 @@
 # SCURE DIALOGFLOW - Script Creation Utilities for Ric Escape (Conversational adventures) with Dialogflow / Google Assistant.
 
+## 1.4.0
+- Upgrade to SCURE 1.4.0 so context mantains after wrong answer (allows to continuously ask for numbers in answers)
+
 ## 1.3.7
 - Expose getCommandForIntent and getIntentForCommand (so you can extend and change items through intent mapper)
 
