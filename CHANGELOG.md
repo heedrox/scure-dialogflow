@@ -1,5 +1,8 @@
 # SCURE DIALOGFLOW - Script Creation Utilities for Ric Escape (Conversational adventures) with Dialogflow / Google Assistant.
 
+## 1.4.2
+- Sync with 1.4.1 scure, to add stopwords
+
 ## 1.4.1
 - Set 'use-followup' context when another context is set
 
