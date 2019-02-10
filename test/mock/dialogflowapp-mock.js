@@ -80,7 +80,7 @@ class DialogflowV2AppMock {
     this.conv = new DialogflowV2ConvMock(options);
     const intent = this.handlers[name];
     if (!intent) {
-      throw Error(`Intent to be mocked not found: ${intent}`);
+      throw Error(`Intent to be mocked not found: ${name}`);
     }
     intent(this.conv, this.request.body.args);
   }
