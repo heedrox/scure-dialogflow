@@ -1,5 +1,8 @@
 # SCURE DIALOGFLOW - Script Creation Utilities for Ric Escape (Conversational adventures) with Dialogflow / Google Assistant.
 
+## 1.4.4
+- Change dialogflow-mock to show intent name
+
 ## 1.4.3
 - Sync with 1.4.2 scure, to improve number recognition
 
