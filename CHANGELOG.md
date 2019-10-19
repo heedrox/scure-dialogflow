@@ -1,5 +1,8 @@
 # SCURE DIALOGFLOW - Script Creation Utilities for Ric Escape (Conversational adventures) with Dialogflow / Google Assistant.
 
+## 1.4.6
+- sync with 1.4.3 scure, to add conditional timeover
+
 ## 1.4.5
 - Upgrade to actions-on-google 2.12.0
 
