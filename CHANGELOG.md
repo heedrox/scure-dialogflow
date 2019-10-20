@@ -1,5 +1,8 @@
 # SCURE DIALOGFLOW - Script Creation Utilities for Ric Escape (Conversational adventures) with Dialogflow / Google Assistant.
 
+## 1.5.0
+- Add walking sound capability (you can add a walking sound in your data, and it sounds whenever a successful walk happens)
+
 ## 1.4.6
 - sync with 1.4.3 scure, to add conditional timeover
 
