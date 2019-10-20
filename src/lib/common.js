@@ -65,7 +65,7 @@ exports.processContext = (conv) => {
 };
 
 const shouldNotIncludeQuestion = sentence =>
-  (sentence.indexOf('?') >= sentence.length - 10) || (sentence.indexOf('<speak>') >= 0);
+  (sentence.lastIndexOf('?') >= sentence.length - 10) || (sentence.indexOf('<speak>') >= 0);
 
 const getFinalSentence = (scure, conv, finalSentence) => {
   const timeLeft = scure.getLeftTimeFrom(conv.data.startTime);

@@ -1,6 +1,7 @@
 const index = require('./mock/server').server;
 
 const scure = buildScure();
+const A_WALKING_AUDIO = '<audio src="AUDIO"></audio>';
 
 describe('Ric Escape - when walking', () => {
   it('changes the roomId when walking', () => {
@@ -136,5 +137,35 @@ describe('Ric Escape - when walking', () => {
     index.fulfillment(request);
 
     expect(getDfaV2Conv().data.roomId).to.equal('habitacion-108');
+  });
+
+  describe('walking sound', () => {
+    it('adds walking sound if walking-sound is defined', () => {
+      const request = aDfaV2Request()
+        .withIntent('walk')
+        .withArgs({ arg: 'pasillo sur' })
+        .withData({ roomId: 'habitacion-108', unlocked: ['hab108'] })
+        .build();
+      scure.data.sentences['walking-sound'] = A_WALKING_AUDIO;
+
+      index.fulfillment(request);
+
+      expect(getDfaV2Conv().lastAsk).to.contains('Estoy en');
+      expect(getDfaV2Conv().lastAsk).to.contains(A_WALKING_AUDIO);
+    });
+
+    it('does not add walking sound if room does not change', () => {
+      const request = aDfaV2Request()
+        .withIntent('walk')
+        .withArgs({ arg: 'quinto pino' })
+        .withData({ roomId: 'habitacion-108', unlocked: ['hab108'] })
+        .build();
+      scure.data.sentences['walking-sound'] = A_WALKING_AUDIO;
+
+      index.fulfillment(request);
+
+      expect(getDfaV2Conv().lastAsk).to.contains('No sé ir');
+      expect(getDfaV2Conv().lastAsk).to.not.contains(A_WALKING_AUDIO);
+    });
   });
 });
