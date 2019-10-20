@@ -1,7 +1,9 @@
 const index = require('./mock/server').server;
 
 const scure = buildScure();
-const A_WALKING_AUDIO = '<audio src="AUDIO"></audio>';
+const A_WALKING_AUDIO = '<audio src="AUDIO1"></audio>';
+const ANOTHER_WALKING_AUDIO = '<audio src="AUDIO2"></audio>';
+const ARRAY_OF_WALKING_AUDIOS = [ A_WALKING_AUDIO, ANOTHER_WALKING_AUDIO ];
 
 describe('Ric Escape - when walking', () => {
   it('changes the roomId when walking', () => {
@@ -167,5 +169,23 @@ describe('Ric Escape - when walking', () => {
       expect(getDfaV2Conv().lastAsk).to.contains('No sé ir');
       expect(getDfaV2Conv().lastAsk).to.not.contains(A_WALKING_AUDIO);
     });
+
+    it('adds a random walking sound if walking-sound is array', () => {
+      const request = aDfaV2Request()
+        .withIntent('walk')
+        .withArgs({ arg: 'pasillo sur' })
+        .withData({ roomId: 'habitacion-108', unlocked: ['hab108'] })
+        .build();
+      scure.data.sentences['walking-sound'] = ARRAY_OF_WALKING_AUDIOS;
+
+      index.fulfillment(request);
+
+      expect(getDfaV2Conv().lastAsk).to.contains('Estoy en');
+      expectToContainOnlyOneOf(getDfaV2Conv().lastAsk, ARRAY_OF_WALKING_AUDIOS);
+    });
   });
 });
+
+function expectToContainOnlyOneOf(sentence, array) {
+  expect(array.filter(string => sentence.indexOf(string) >=0).length).to.equal(1);
+}

@@ -5,19 +5,19 @@ const { sendResponse } = require('../lib/common');
 
 const hasValue = x => (typeof x !== 'undefined') && (x!=='');
 
-const addWalkingSound = (response, scure) => {
+const getRandom = array => array[Math.floor(Math.random() * array.length)];
+
+const getSoundToAdd = (previousRoom, conv, scure) => {
   const walkingSound = scure.sentences.get('walking-sound');
-  if (hasValue(walkingSound)) {
-    response.sentence = walkingSound + response.sentence;
-  }
+
+  if (!hasValue(walkingSound)) return '';
+  if (conv.data.roomId === previousRoom) return '';
+  return Array.isArray(walkingSound) ? getRandom(walkingSound) : walkingSound;
 };
 
-const addWalkingSoundIfRoomChanges = (scureResponse, previousRoom, conv, scure) => {
-  const newRoom = conv.data.roomId;
-
-  if (newRoom !== previousRoom) {
-    addWalkingSound(scureResponse, scure);
-  }
+const addWalkingSoundIfRoomChanges = (response, previousRoom, conv, scure) => {
+  const soundToAdd = getSoundToAdd(previousRoom, conv, scure);
+  response.sentence = soundToAdd + response.sentence;
 };
 
 const walk = scure => (conv, args) => {
