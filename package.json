@@ -1,6 +1,6 @@
 {
   "name": "scure-dialogflow",
-  "version": "1.5.0",
+  "version": "1.5.1",
   "description": "Javascript engine for creating conversational adventures with Dialogflow / GoogleAssistant through SCURE",
   "main": "index.js",
   "scripts": {
@@ -39,7 +39,7 @@
   },
   "dependencies": {
     "actions-on-google": "^2.12.0",
-    "scure": "1.4.3"
+    "scure": "1.5.0"
   },
   "devDependencies": {
     "babel-eslint": "^8.2.3",
