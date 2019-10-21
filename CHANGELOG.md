@@ -1,5 +1,8 @@
 # SCURE DIALOGFLOW - Script Creation Utilities for Ric Escape (Conversational adventures) with Dialogflow / Google Assistant.
 
+## 1.5.3
+- Automatically add <speak> if audio is present
+
 ## 1.5.2
 - upgrade to 1.5.1 scure (to avoid failing when syns)
 

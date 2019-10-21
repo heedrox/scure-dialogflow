@@ -74,15 +74,23 @@ const getFinalSentence = (scure, conv, finalSentence) => {
   return substitute(finalSentence.description, { remainingTime });
 };
 
+const speak = (sentence, conv) => {
+  if ((sentence.indexOf("<audio") >= 0) && (sentence.indexOf("<speak") === -1)) {
+    conv.ask(`<speak>${sentence}</speak>`);
+  } else {
+    conv.ask(`${sentence}`);
+  }
+};
+
 exports.sendResponse = (conv, scure, scureResponse) => {
   const finalSentence = scureResponse.sentence;
   if (finalSentence.isEndingScene) {
     const finalWords = getFinalSentence(scure, conv, finalSentence);
     conv.close(finalWords);
   } else if (shouldNotIncludeQuestion(finalSentence)) {
-    conv.ask(finalSentence);
+    speak(finalSentence, conv);
   } else {
     const finalQuestion = scure.sentences.get('final-question');
-    conv.ask(`${finalSentence} ${finalQuestion}`);
+    speak(`${finalSentence} ${finalQuestion}`, conv);
   }
 };
